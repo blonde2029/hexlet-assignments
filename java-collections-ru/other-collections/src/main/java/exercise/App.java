@@ -5,29 +5,25 @@ import java.util.stream.Collectors;
 
 // BEGIN
 class App {
-    public static LinkedHashMap<String, String> genDiff(Map<String, Object> v1, Map<String, Object> v2) {
-        LinkedHashMap<String, String> result = new LinkedHashMap<>();
+    public static Map<String, String> genDiff(Map<String, Object> v1, Map<String, Object> v2) {
+        Map<String, String> result = new LinkedHashMap<>();
+        Set<String> keys = new TreeSet<>(v1.keySet());
+        keys.addAll(v2.keySet());
 
-        //Set<Map<String,Object>> allMaps = new HashSet<>((Collection) v1.entrySet());
-        //allMaps.addAll((Collection) v2.entrySet());
-        Map<String, Object> allMaps = new HashMap<>(v1);
-        allMaps.putAll(v2);
+        for (String key: keys) {
 
-        for (String elem : allMaps.keySet()) {
-            if (!v1.containsKey(elem)) {
-                result.put(elem, "added");
-            } else if (!v2.containsKey(elem)) {
-                result.put(elem, "deleted");
-            } else if (v1.containsValue(allMaps.get(elem))) {
-                result.put(elem, "unchanged");
-            } else if (!v1.containsValue(allMaps.get(elem))) {
-                result.put(elem, "changed");
+            if (!v1.containsKey(key)) {
+                result.put(key, "added");
+            } else if (!v2.containsKey(key)) {
+                result.put(key, "deleted");
+            } else if (v1.get(key).equals(v2.get(key))) {
+                result.put(key, "unchanged");
+            } else {
+                result.put(key, "changed");
             }
         }
-
         System.out.println(result);
         return result;
-
     }
 }
 //END
