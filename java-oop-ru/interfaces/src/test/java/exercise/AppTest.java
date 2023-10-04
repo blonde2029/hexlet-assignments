@@ -7,7 +7,14 @@ import java.util.List;
 
 
 class AppTest {
-
+    @Test
+    void testReversedSequence() {
+        CharSequence text = new ReversedSequence("abcdef");
+        assertThat(text.toString()).isEqualTo("fedcba"); // "fedcba"
+        assertThat(text.charAt(1)).isEqualTo('e'); // 'e'
+        assertThat(text.length()).isEqualTo(6);
+        assertThat(text.subSequence(1, 4).toString()).isEqualTo("edc");
+    }
     @Test
     void testBuildApartmentsList1() {
         List<Home> apartments = new ArrayList<>(List.of(

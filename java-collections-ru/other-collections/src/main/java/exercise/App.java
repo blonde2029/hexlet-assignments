@@ -5,13 +5,12 @@ import java.util.stream.Collectors;
 
 // BEGIN
 class App {
-    public static Map<String, String> genDiff(Map<String, Object> v1, Map<String, Object> v2) {
-        Map<String, String> result = new LinkedHashMap<>();
-        Set<String> keys = new TreeSet<>(v1.keySet());
-        keys.addAll(v2.keySet());
-
-        for (String key: keys) {
-
+    public static LinkedHashMap<String, String> genDiff(Map<String, Object> v1, Map<String, Object> v2) {
+        LinkedHashMap<String, String> result = new LinkedHashMap<>();
+        SortedSet<String> allKeys = new TreeSet<>(v1.keySet());
+        allKeys.addAll(v2.keySet());
+        System.out.println(allKeys);
+        for (String key: allKeys) {
             if (!v1.containsKey(key)) {
                 result.put(key, "added");
             } else if (!v2.containsKey(key)) {
