@@ -16,14 +16,15 @@ public class SingleTag extends Tag {
 
     @Override
     public String toString() {
-        StringBuilder tagValueStr = new StringBuilder();
-        getTagValue()
-                .entrySet()
-                .stream()
-                .forEach(elem -> tagValueStr.append(" " + elem.getKey()  + "=" + "\"" + elem.getValue() + "\""));
-        return "<" + getTagName()
-                + tagValueStr
-                + ">";
+//        StringBuilder tagValueStr = new StringBuilder();
+//        getTagValue()
+//                .entrySet()
+//                .stream()
+//                .forEach(elem -> tagValueStr.append(" " + elem.getKey()  + "=" + "\"" + elem.getValue() + "\""));
+//        return "<" + getTagName()
+//                + tagValueStr
+//                + ">";
+        return "<" + getTagName() + stringifyAttributes() + ">";
     }
 }
 // END

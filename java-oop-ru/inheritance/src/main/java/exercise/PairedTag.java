@@ -29,15 +29,18 @@ public class PairedTag extends Tag {
 
     @Override
     public String toString() {
-        StringBuilder tagValueStr = new StringBuilder();
-        getTagValue()
-                .entrySet()
-                .stream()
-                .forEach(elem -> tagValueStr.append(" " + elem.getKey()  + "=" + "\"" + elem.getValue() + "\""));
-
-        return "<" + getTagName() + tagValueStr + ">"
-                + tagBody + subTag.toString().replace("[", "").replace("]", "").replace(", ", "")
-                + "</" + getTagName() + ">";
+//        StringBuilder tagValueStr = new StringBuilder();
+//        getTagValue()
+//                .entrySet()
+//                .stream()
+//                .forEach(elem -> tagValueStr.append(" " + elem.getKey()  + "=" + "\"" + elem.getValue() + "\""));
+//
+//        return "<" + getTagName() + tagValueStr + ">"
+//                + tagBody + subTag.toString().replace("[", "").replace("]", "").replace(", ", "")
+//                + "</" + getTagName() + ">";
+        String value = subTag.stream().map(Object::toString).collect(Collectors.joining(""));
+        return "<" + getTagName() + stringifyAttributes() + ">"
+                + tagBody + value + "</" + getTagName() + ">";
     }
 
     public List<Tag> getSubTag() {

@@ -36,5 +36,12 @@ public class Tag {
     public void setTagValue(Map<String, String> tagValue) {
         this.tagValue = tagValue;
     }
+    public String stringifyAttributes() {
+        return tagValue.keySet().stream()
+                .map(key -> {
+                    String value = tagValue.get(key);
+                    return String.format(" %s=\"%s\"", key, value);
+                }).collect(Collectors.joining(""));
+    }
 }
 // END
