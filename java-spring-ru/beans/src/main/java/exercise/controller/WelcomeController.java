@@ -15,10 +15,7 @@ public class WelcomeController {
     private Daytime daytime;
     @GetMapping(path = "/welcome")
     public String welcome() {
-        if (daytime.getName().equals("night")) {
-            return "It is night now! Welcome to Spring!";
-        }
-        return "It is day now! Welcome to Spring!";
+        return "It is " + daytime.getName() + " now! Welcome to Spring!";
     }
 }
 // END

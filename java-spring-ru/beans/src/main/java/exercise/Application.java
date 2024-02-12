@@ -24,6 +24,7 @@ public class Application {
 
     // BEGIN
     @Bean
+    @RequestScope
     public Daytime getDayTime() {
         var hour = LocalDateTime.now().getHour();
         if (hour >= 6 && hour < 22) {
