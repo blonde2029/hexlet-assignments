@@ -27,6 +27,7 @@ public class PostsController {
 
    public PostDTO postToDTO (Post post) {
         var postDTO = new PostDTO();
+        postDTO.setTitle(post.getTitle());
         postDTO.setBody(post.getBody());
         postDTO.setId(post.getId());
         List<CommentDTO> postComments = commentRepository
@@ -57,16 +58,7 @@ public class PostsController {
     public PostDTO show(@PathVariable Long id) {
        var post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post with id " +
                + id + " not found"));
-       var postDTO = new PostDTO();
-       postDTO.setId(post.getId());
-       postDTO.setTitle(post.getTitle());
-       postDTO.setBody(post.getBody());
-       List<CommentDTO> postComments = commentRepository.findByPostId(post.getId())
-                       .stream()
-                       .map(this::commentToDTO)
-                       .toList();
-       postDTO.setComments(postComments);
-       return postDTO;
+       return postToDTO(post);
    }
 }
 // END
