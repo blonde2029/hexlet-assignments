@@ -38,13 +38,13 @@ public class Guest {
     @Email
     private String email;
 
-    @Size(min = 12)
-    @Size(max = 14)
-    @Pattern(regexp = "^\\+[0-9]*$")
+//    @Size(min = 12)
+//    @Size(max = 14)
+    @Pattern(regexp = "^\\+[0-9]{11,13}")
     private String phoneNumber;
 
-    @Size(min = 4)
-    @Size(max = 4)
+//    @Size(min = 4)
+//    @Size(max = 4)
     @Pattern(regexp = "\\d{4}$")
     private String clubCard;
     @Future
