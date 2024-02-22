@@ -9,16 +9,23 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 // BEGIN
+import exercise.model.User;
 @Service
 public class CustomUserDetailsService implements UserDetailsManager {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public void createUser(UserDetails user) {
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
+    public void createUser(UserDetails userData) {
+        var user = new User();
+        user.setEmail(userData.getUsername());
+        var hashedPassword = passwordEncoder.encode(userData.getPassword());
+        user.setPasswordDigest(hashedPassword);
+        userRepository.save(user);
     }
 
     @Override
@@ -42,8 +49,8 @@ public class CustomUserDetailsService implements UserDetailsManager {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userRepository.findByEmail(username)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return user;
     }
